@@ -8,7 +8,7 @@ configurations.all {
 }
 
 android {
-    namespace 'com.example.oneui'
+    namespace 'com.example.myoneuiapp2'
     compileSdk 35
 
     defaultConfig {
