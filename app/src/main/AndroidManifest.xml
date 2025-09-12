@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.example.myoneuiapp2"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:theme="@style/OneUITheme">
+        <activity android:name=".SettingsActivity"
+            android:label="@string/title_settings"
+            android:configChanges="locale|layoutDirection">
+        </activity>
+        <activity android:name=".ScrollListActivity"
+            android:label="@string/title_scroll_list"
+            android:configChanges="locale|layoutDirection">
+        </activity>
+        <activity android:name=".MainActivity"
+            android:label="@string/title_main"
+            android:configChanges="locale|layoutDirection">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
