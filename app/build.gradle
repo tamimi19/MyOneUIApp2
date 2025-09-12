@@ -29,6 +29,11 @@ android {
     }
 }
 
+configurations.all {
+    exclude group: 'androidx.appcompat', module: 'appcompat'
+    exclude group: 'androidx.core', module: 'core'
+}
+
 dependencies {
     // مكتبات One UI Project SESL
     implementation 'io.github.oneuiproject.sesl:appcompat:1.4.0'
