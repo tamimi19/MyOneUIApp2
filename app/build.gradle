@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace "com.example.myoneuiapp2"
     compileSdk 33
 
     defaultConfig {
