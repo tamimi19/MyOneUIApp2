@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">One UI App</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_scroll_list">Scroll List</string>
+    <string name="title_main">Main</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_scroll_list">Scroll List</string>
+    <string name="pref_language">Language</string>
+    <string name="pref_theme">Theme</string>
+    <string name="pref_dark">Dark Theme</string>
+    <string name="pref_light">Light Theme</string>
+    <string name="pref_notifications">Notifications</string>
+    <string name="notifications_enabled">Notifications enabled</string>
+    <string name="notifications_disabled">Notifications disabled</string>
+    <string name="pref_value_ar">Arabic</string>
+    <string name="pref_value_en">English</string>
+</resources>
