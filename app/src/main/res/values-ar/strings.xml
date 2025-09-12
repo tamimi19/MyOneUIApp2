@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">تطبيق One UI</string>
+    <string name="menu_settings">الإعدادات</string>
+    <string name="menu_scroll_list">قائمة التمرير</string>
+    <string name="title_main">الرئيسية</string>
+    <string name="title_settings">الإعدادات</string>
+    <string name="title_scroll_list">قائمة التمرير</string>
+    <string name="pref_language">اللغة</string>
+    <string name="pref_theme">السمة</string>
+    <string name="pref_dark">الوضع الداكن</string>
+    <string name="pref_light">الوضع الفاتح</string>
+    <string name="pref_notifications">الإشعارات</string>
+    <string name="notifications_enabled">تم تفعيل الإشعارات</string>
+    <string name="notifications_disabled">تم تعطيل الإشعارات</string>
+    <string name="pref_value_ar">العربية</string>
+    <string name="pref_value_en">الإنجليزية</string>
+</resources>
