@@ -12,14 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * فئة أساسية توفر سلوك السحب لأسفل للمحتوى (قوائم ListView).
- * الأنشطة التي تريد هذا السلوك ترث من هذه الفئة.
- *
- * Requirements:
- * - في الـ layout يجب وجود TextView مع id = header_text
- * - و ListView مع id = list_view
- */
 public abstract class BasePullDownActivity extends AppCompatActivity {
 
     protected TextView headerText;
@@ -49,7 +41,8 @@ public abstract class BasePullDownActivity extends AppCompatActivity {
     }
 
     private void attachTouchListener() {
-        listView.setOnTouchListener(new ListTouchListener());
+        // تم التعديل هنا: نمرر "this" للكلاس الجديد
+        listView.setOnTouchListener(new ListTouchListener(this));
     }
 
     private void applyTranslateAndScale(float translate) {
@@ -69,14 +62,10 @@ public abstract class BasePullDownActivity extends AppCompatActivity {
         ValueAnimator animator = ValueAnimator.ofFloat(from, 0f);
         animator.setInterpolator(new DecelerateInterpolator());
         animator.setDuration(280);
-
-        // تم التعديل هنا: استبدال الكلاس الداخلي ResetAnimatorUpdateListener
-        // بتعبير lambda لتبسيط الكود وتجنب مشاكل R8.
         animator.addUpdateListener(animation -> {
             float val = (float) animation.getAnimatedValue();
             applyTranslateAndScale(val);
         });
-
         animator.start();
     }
 
@@ -94,13 +83,22 @@ public abstract class BasePullDownActivity extends AppCompatActivity {
         return dp * getResources().getDisplayMetrics().density;
     }
 
-    // تم التعديل هنا: إزالة "private final" لتبسيط الكلاس لمترجم R8.
-    class ListTouchListener implements View.OnTouchListener {
+    // تم التعديل هنا: تحويل الكلاس إلى static nested class
+    private static class ListTouchListener implements View.OnTouchListener {
+        // إضافة مرجع للكلاس الخارجي للوصول إلى متغيراته ودواله
+        private final BasePullDownActivity activity;
+
+        // Constructor لاستلام المرجع
+        public ListTouchListener(BasePullDownActivity activity) {
+            this.activity = activity;
+        }
+
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            if (!isListAtTop()) {
+            // استخدام المرجع للوصول للدوال والمتغيرات
+            if (!activity.isListAtTop()) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    startY = event.getY();
+                    activity.startY = event.getY();
                 }
                 return false;
             }
@@ -108,26 +106,24 @@ public abstract class BasePullDownActivity extends AppCompatActivity {
             float y = event.getY();
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
-                    startY = y;
+                    activity.startY = y;
                     return false;
                 case MotionEvent.ACTION_MOVE:
-                    float dy = y - startY;
-                    if (dy > 0 || currentTranslateY > 0) {
+                    float dy = y - activity.startY;
+                    if (dy > 0 || activity.currentTranslateY > 0) {
                         float translate = (dy > 0)
-                                ? Math.min(maxTranslateY, currentTranslateY + dy / 2f)
-                                : Math.max(0f, currentTranslateY + dy / 2f);
-                        applyTranslateAndScale(translate);
+                                ? Math.min(activity.maxTranslateY, activity.currentTranslateY + dy / 2f)
+                                : Math.max(0f, activity.currentTranslateY + dy / 2f);
+                        activity.applyTranslateAndScale(translate);
                     }
                     break;
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
-                    animateReset();
-                    startY = 0f;
+                    activity.animateReset();
+                    activity.startY = 0f;
                     break;
             }
             return false;
         }
     }
-    
-    // لم نعد بحاجة للكلاس ResetAnimatorUpdateListener لأنه تم استبداله بـ lambda.
 }
