@@ -2,53 +2,55 @@ plugins {
     id 'com.android.application'
 }
 
-configurations.all {
-    // استثناء المكتبات القياسية لـ AndroidX بناءً على توجيهات OneUIProject
-    exclude group: 'androidx.appcompat', module: 'appcompat'
-    exclude group: 'androidx.core', module: 'core'
-}
-
 android {
-    namespace 'com.example.myoneuiapp2'
-    compileSdk 35
+    namespace "com.example.myoneuiapp2"
+    compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.oneui"
-        minSdk 24
-        targetSdk 35
+        applicationId "com.example.myoneuiapp2"
+        minSdk 30
+        targetSdk 33
         versionCode 1
         versionName "1.0"
-        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
-
-    buildFeatures {
-        viewBinding true
-    }
-
     buildTypes {
         release {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    buildFeatures {
+        viewBinding true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
+configurations.all {
+    exclude group: 'androidx.appcompat', module: 'appcompat'
+    exclude group: 'androidx.core', module: 'core'
+}
+
 dependencies {
-    // مكتبات One UI SESL الرئيسية بدلاً من المكتبات الافتراضية
+    // مكتبات One UI Project SESL
     implementation 'io.github.oneuiproject.sesl:appcompat:1.4.0'
-    implementation 'io.github.oneuiproject.sesl:material:1.5.0'
-    implementation 'io.github.oneuiproject.sesl:recyclerview:1.4.1'
-
-    // مكتبات القيود (لا توجد بديل SESL لها)
-    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
-
-    // مكتبات SESL الاختيارية
+    implementation 'io.github.oneuiproject.sesl:apppickerview:1.0.0'
+    implementation 'io.github.oneuiproject.sesl:indexscroll:1.0.3'
+    implementation 'io.github.oneuiproject.sesl:picker-basic:1.2.0'
+    implementation 'io.github.oneuiproject.sesl:picker-color:1.1.0'
     implementation 'io.github.oneuiproject.sesl:preference:1.1.0'
-    implementation 'io.github.oneuiproject.sesl:indexscroll:1.0.3'  // لإضافة فهرس تمرير جانبي (اختياري)
+    implementation 'io.github.oneuiproject.sesl:recyclerview:1.4.1'
+    implementation 'io.github.oneuiproject.sesl:swiperefreshlayout:1.0.0'
+    implementation 'io.github.oneuiproject.sesl:material:1.0.0'
+
+    // مكتبة AndroidX
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // مكتبات أخرى
+    implementation 'com.airbnb.android:lottie:6.4.0'
     implementation 'io.github.oneuiproject:icons:1.1.0'
     implementation 'io.github.oneuiproject:design:1.2.6'
 }
