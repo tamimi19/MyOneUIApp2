@@ -1,37 +1,42 @@
 package com.example.myoneuiapp2;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
-public class ScrollListActivity extends AppCompatActivity {
+public class ScrollListActivity extends BasePullDownActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scroll_list);
 
+        // شريط الأدوات
         Toolbar toolbar = findViewById(R.id.toolbar_scroll);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
-        // ملء القائمة بـ70 عنصر
+        // إعداد القائمة (70 عنصر كما طلبت سابقًا)
         String[] items = new String[70];
         for (int i = 0; i < 70; i++) {
-            items[i] = "Item " + (i + 1);
+            items[i] = "عنصر " + (i + 1);
         }
-        ListView listView = findViewById(R.id.list_view);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-            android.R.layout.simple_list_item_1, items);
-        listView.setAdapter(adapter);
+                android.R.layout.simple_list_item_1, items);
+        // تأكد من أن listView موجود
+        if (findViewById(R.id.list_view) != null) {
+            // setContentView تم من قبل، الآن نهيئ الـ BasePullDownActivity
+            initPullDown();
+            if (listView != null) listView.setAdapter(adapter);
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // معالجة زر العودة في شريط الأدوات
+        // زر العودة في toolbar
         if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
