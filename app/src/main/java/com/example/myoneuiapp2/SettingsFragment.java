@@ -45,14 +45,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
             Configuration config = new Configuration();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 config.setLocale(locale);
-                // createConfigurationContext يمكن استخدامها إذا رغبت
             } else {
                 config.locale = locale;
-                if (activity != null) {
-                    activity.getResources().updateConfiguration(config, activity.getResources().getDisplayMetrics());
-                }
             }
-            if (activity != null) activity.recreate();
+            if (activity != null) {
+                activity.getResources().updateConfiguration(config, activity.getResources().getDisplayMetrics());
+                activity.recreate();
+            }
             return true;
         } else if (key.equals("theme")) {
             // تغيير السمة (الوضع)
@@ -62,7 +61,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
-            if (activity != null) activity.recreate();
+            if (activity != null) {
+                activity.recreate();
+            }
             return true;
         } else if (key.equals("notifications")) {
             // تبديل الإشعارات
