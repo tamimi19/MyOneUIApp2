@@ -24,10 +24,9 @@ jobs:
       - name: Clear possibly corrupt Gradle cache
         run: rm -rf ~/.gradle/caches/jars-9 || true
 
-      - name: Ensure gradle.properties for CI (disable R8 temporarily + increase heap)
+      - name: Ensure gradle.properties for CI (increase heap only)
         run: |
           cat > gradle.properties <<'EOF'
-          android.enableR8=false
           org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8
           EOF
         working-directory: ${{ github.workspace }}
