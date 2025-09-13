@@ -29,18 +29,17 @@ public abstract class BasePullDownActivity extends AppCompatActivity {
     private float originalTextSizePx = 0f;
 
     // تتبع لموضع اللمس
-    private float startY = 0f;
+    protected float startY = 0f;
 
     // الحد الأقصى للإزاحة الرأسيّة (بالبكسل)
     private float maxTranslateY = 240f; // سيتم تحويله من dp في onCreate
 
     // الحالة الحالية للإزاحة
-    private float currentTranslateY = 0f;
+    protected float currentTranslateY = 0f;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // ملاحظة: لا تستخدم setContentView هنا، لأن الأنشطة الوريثة ستنادي setContentView ثم يجب استدعاء initPullDown() بعدها.
     }
 
@@ -68,50 +67,8 @@ public abstract class BasePullDownActivity extends AppCompatActivity {
     }
 
     private void attachTouchListener() {
-        listView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // فقط إذا كانت القائمة في القمة نسمح بتأثير السحب لأسفل
-                if (!isListAtTop()) {
-                    // إعادة تعيين بدايات السحب عند النزول الداخلي للقائمة
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        startY = event.getY();
-                    }
-                    return false; // لا نعترض سلوك التمرير الطبيعي
-                }
-
-                float y = event.getY();
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_DOWN:
-                        startY = y;
-                        return false; // لا نعترض ACTION_DOWN
-                    case MotionEvent.ACTION_MOVE:
-                        float dy = y - startY;
-                        // نعمل فقط للسحب لأسفل (dy > 0) أو أثناء إرجاع (currentTranslateY > 0)
-                        if (dy > 0 || currentTranslateY > 0) {
-                            // نحسب قيمة الإزاحة (نقل حساس أقل من المسافة الحقيقية)
-                            float translate = currentTranslateY;
-                            if (dy > 0) {
-                                translate = Math.min(maxTranslateY, currentTranslateY + dy / 2f);
-                            } else {
-                                // dy < 0 أثناء السحب لأعلى، نخفض الإزاحة
-                                translate = Math.max(0f, currentTranslateY + dy / 2f);
-                            }
-                            applyTranslateAndScale(translate);
-                            // لا نعيد startY هنا لكي يكون السحب سلسًا عبر حركات متعددة
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        // عند الإفلات نعيد كل شيء إلى الصفر بحركة ناعمة
-                        animateReset();
-                        startY = 0f;
-                        break;
-                }
-                // نعيد false حتى تستمر ListView بأخذ أحداث التمرير (لكننا نقوم بتأثير مرئي فوقها)
-                return false;
-            }
-        });
+        // استعمل Named inner class بدل anonymous لتجنّب مشاكل R8
+        listView.setOnTouchListener(new ListTouchListener());
     }
 
     private void applyTranslateAndScale(float translate) {
@@ -134,13 +91,7 @@ public abstract class BasePullDownActivity extends AppCompatActivity {
         ValueAnimator animator = ValueAnimator.ofFloat(from, 0f);
         animator.setInterpolator(new DecelerateInterpolator());
         animator.setDuration(280);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float val = (float) animation.getAnimatedValue();
-                applyTranslateAndScale(val);
-            }
-        });
+        animator.addUpdateListener(new ResetAnimatorUpdateListener());
         animator.start();
     }
 
@@ -159,4 +110,59 @@ public abstract class BasePullDownActivity extends AppCompatActivity {
     protected float dpToPx(float dp) {
         return dp * getResources().getDisplayMetrics().density;
     }
-                          }
+
+    // ---------------- Named inner classes to avoid R8 NPE ----------------
+
+    private final class ListTouchListener implements View.OnTouchListener {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            // فقط إذا كانت القائمة في القمة نسمح بتأثير السحب لأسفل
+            if (!isListAtTop()) {
+                // إعادة تعيين بدايات السحب عند النزول الداخلي للقائمة
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    startY = event.getY();
+                }
+                return false; // لا نعترض سلوك التمرير الطبيعي
+            }
+
+            float y = event.getY();
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN:
+                    startY = y;
+                    return false; // لا نعترض ACTION_DOWN
+                case MotionEvent.ACTION_MOVE:
+                    float dy = y - startY;
+                    // نعمل فقط للسحب لأسفل (dy > 0) أو أثناء إرجاع (currentTranslateY > 0)
+                    if (dy > 0 || currentTranslateY > 0) {
+                        // نحسب قيمة الإزاحة (نقل حساس أقل من المسافة الحقيقية)
+                        float translate = currentTranslateY;
+                        if (dy > 0) {
+                            translate = Math.min(maxTranslateY, currentTranslateY + dy / 2f);
+                        } else {
+                            // dy < 0 أثناء السحب لأعلى، نخفض الإزاحة
+                            translate = Math.max(0f, currentTranslateY + dy / 2f);
+                        }
+                        applyTranslateAndScale(translate);
+                        // لا نعيد startY هنا لكي يكون السحب سلسًا عبر حركات متعددة
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    // عند الإفلات نعيد كل شيء إلى الصفر بحركة ناعمة
+                    animateReset();
+                    startY = 0f;
+                    break;
+            }
+            // نعيد false حتى تستمر ListView بأخذ أحداث التمرير (لكننا نقوم بتأثير مرئي فوقها)
+            return false;
+        }
+    }
+
+    private final class ResetAnimatorUpdateListener implements ValueAnimator.AnimatorUpdateListener {
+        @Override
+        public void onAnimationUpdate(ValueAnimator animation) {
+            float val = (float) animation.getAnimatedValue();
+            applyTranslateAndScale(val);
+        }
+    }
+}
