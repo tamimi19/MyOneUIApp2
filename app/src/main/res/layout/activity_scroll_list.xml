@@ -1,32 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/activity_scroll_list.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container_scroll"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Toolbar -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:title="@string/title_scroll_list" />
-
-    <!-- رأس الشاشة: هذا الـ TextView هو الذي يتغير حجمه أثناء السحب -->
+    <!-- رأس الشاشة -->
     <TextView
         android:id="@+id/header_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_scroll_list"
-        android:textSize="20sp"
+        android:text="عنوان الشاشة"
+        android:textSize="24sp"
         android:gravity="center"
-        android:padding="14dp" />
+        android:padding="16dp"/>
 
-    <!-- قائمة التمرير -->
+    <!-- قائمة العناصر -->
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"/>
+
 </LinearLayout>
