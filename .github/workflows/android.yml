@@ -12,11 +12,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
       - name: Use project-local Gradle cache
         run: echo "GRADLE_USER_HOME=$GITHUB_WORKSPACE/.gradle" >> $GITHUB_ENV
@@ -24,15 +24,8 @@ jobs:
       - name: Clear possibly corrupt Gradle cache
         run: rm -rf ~/.gradle/caches/jars-9 || true
 
-      - name: Ensure gradle.properties for CI (increase heap only)
-        run: |
-          cat > gradle.properties <<'EOF'
-          org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8
-          EOF
-        working-directory: ${{ github.workspace }}
-
       - name: Download Gradle 8.14.3 temporarily
-        run: wget -q https://services.gradle.org/distributions/gradle-8.14.3-bin.zip -O gradle-8.14.3-bin.zip
+        run: wget https://services.gradle.org/distributions/gradle-8.14.3-bin.zip -O gradle-8.14.3-bin.zip
 
       - name: Unzip temporary Gradle
         run: unzip -q gradle-8.14.3-bin.zip
@@ -43,34 +36,12 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - id: build
-        name: Build (clean + assembleDebug) with stacktrace
+      - name: Build APK with Gradle Wrapper
         env:
           JITPACK_TOKEN: ${{ secrets.JITPACK_TOKEN }}
-        run: |
-          set -o pipefail
-          ./gradlew clean assembleDebug --no-daemon --stacktrace 2>&1 | tee build.log
-        continue-on-error: true
+        run: ./gradlew assembleDebug
 
-      - name: Upload build log (always)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-log
-          path: build.log
-
-      - id: check_apk
-        name: Check APK exists
-        if: always()
-        run: |
-          if [ -f app/build/outputs/apk/debug/app-debug.apk ]; then
-            echo "found=true" >> $GITHUB_OUTPUT
-          else
-            echo "found=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Upload APK Artifact (if present)
-        if: steps.check_apk.outputs.found == 'true'
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: oneui-debug-apk
