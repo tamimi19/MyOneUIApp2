@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl">
 
     <!-- المحتوى الرئيسي -->
     <LinearLayout
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="@string/app_name" />
+            android:title="@string/app_name" />
 
         <TextView
             android:layout_width="match_parent"
@@ -28,12 +28,30 @@
             android:textSize="24sp" />
     </LinearLayout>
 
-    <!-- درج التنقل على الجانب الأيمن -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+    <!-- درج التنقل: محتوى يدوي (بدون استخدام com.google.android.material.NavigationView) -->
+    <LinearLayout
+        android:id="@+id/drawer_content"
+        android:orientation="vertical"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        app:menu="@menu/drawer_menu" />
+        android:background="#FFFFFF"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/btn_nav_scroll_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_scroll_list" />
+
+        <Button
+            android:id="@+id/btn_nav_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_settings"
+            android:layout_marginTop="8dp" />
+
+        <!-- أضف عناصر أخرى هنا حسب حاجتك -->
+    </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
