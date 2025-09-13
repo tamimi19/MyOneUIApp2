@@ -13,8 +13,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar_settings);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_settings);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_settings);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // عرض واجهة التفضيلات
         getSupportFragmentManager().beginTransaction()
