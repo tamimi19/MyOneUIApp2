@@ -1,8 +1,8 @@
 package com.example.myoneuiapp2;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import io.github.oneuiproject.sesl.support.v7.app.AppCompatActivity;
+import io.github.oneuiproject.sesl.support.v7.widget.Toolbar;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.view.MenuItem;
