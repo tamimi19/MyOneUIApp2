@@ -1,21 +1,13 @@
 <resources>
-
-    <!-- الثيم الرئيسي للتطبيق بأسلوب One UI -->
-    <style name="OneUITheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- ألوان أساسية -->
+    <style name="OneUITheme" parent="Theme.SESL.Light.NoActionBar">
         <item name="colorPrimary">@color/oneui_primary</item>
         <item name="colorPrimaryDark">@color/oneui_primary_dark</item>
         <item name="colorAccent">@color/oneui_accent</item>
 
-        <!-- لون الخلفية -->
         <item name="android:windowBackground">@color/oneui_background</item>
 
-        <!-- لون النصوص -->
         <item name="android:textColorPrimary">@color/oneui_text_primary</item>
         <item name="android:textColorSecondary">@color/oneui_text_secondary</item>
 
-        <!-- خطوط One UI -->
-        <item name="android:fontFamily">@font/samsungone</item>
-    </style>
-
+        </style>
 </resources>
