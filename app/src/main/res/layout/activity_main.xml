@@ -14,14 +14,14 @@
         android:layout_height="match_parent">
 
         <!-- استخدام AppBarLayout الخاص بمكتبة One UI -->
-        <de.dlyt.yanndroid.oneui.widget.AppBarLayout
+        <sesl.support.v7.widget.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <!-- استخدام Toolbar الخاص بمكتبة One UI -->
-            <de.dlyt.yanndroid.oneui.widget.Toolbar
+            <sesl.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -29,7 +29,7 @@
                 app:title="@string/app_name"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        </de.dlyt.yanndroid.oneui.widget.AppBarLayout>
+        </sesl.support.v7.widget.AppBarLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
     </LinearLayout>
 
     <!-- استخدام NavigationView الخاص بمكتبة One UI -->
-    <de.dlyt.yanndroid.oneui.view.NavigationView
+    <sesl.support.v7.view.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
