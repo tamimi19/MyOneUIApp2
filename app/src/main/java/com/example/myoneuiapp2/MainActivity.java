@@ -1,15 +1,15 @@
 package com.example.myoneuiapp2;
 
 import android.os.Bundle;
-import sesl.support.drawerlayout.widget.DrawerLayout;
+import io.github.oneuiproject.sesl.support.drawerlayout.widget.DrawerLayout;
 import android.view.Gravity;
 import android.content.Intent;
 
 // استيراد مكونات سامسونج SESL من المسار الصحيح
-import sesl.support.v7.app.AppCompatActivity;
-import sesl.support.v7.widget.Toolbar;
-import sesl.support.v7.widget.AppBarLayout;
-import sesl.support.v7.view.NavigationView;
+import io.github.oneuiproject.sesl.support.v7.app.AppCompatActivity;
+import io.github.oneuiproject.sesl.support.v7.widget.Toolbar;
+import io.github.oneuiproject.sesl.support.v7.widget.AppBarLayout;
+import io.github.oneuiproject.sesl.support.v7.view.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         // ربط الـ AppBarLayout وتفعيل ميزة السحب لأسفل للوصول السهل
         // تم تغيير اسم الكلاس والدالة لتتوافق مع المكتبة
         AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
-        appBarLayout.setExpandedAccessibilityEnabled(true);
+        appBarLayout.setExpanded(true);  // تم تغيير إلى setExpanded للتوسع الافتراضي
 
         // استخدام Toolbar الخاص بـ One UI
         // تم تغيير اسم الكلاس
@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         // إعداد أيقونة القائمة لفتح درج التنقل على اليمين
-        // ملاحظة: قد تحتاج إلى أيقونة مخصصة هنا إذا كانت الايقونة الافتراضية لا تعمل
-        toolbar.setNavigationIcon(sesl.support.appcompat.R.drawable.abc_ic_menu_overflow_material);
+        // ملاحظة: استخدم drawable من SESL أو android
+        toolbar.setNavigationIcon(android.R.drawable.ic_menu_more);  // غير إلى drawable عام لتجنب الخطأ
         toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(Gravity.END));
 
         // التعامل مع اختيار عناصر القائمة الجانبية
