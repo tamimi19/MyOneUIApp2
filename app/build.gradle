@@ -29,34 +29,19 @@ android {
     }
 }
 
-configurations.all {
-    exclude group: 'androidx.appcompat', module: 'appcompat'
-    exclude group: 'androidx.core', module: 'core'
-    exclude group: 'androidx.recyclerview', module: 'recyclerview'
-    exclude group: 'androidx.swiperefreshlayout', module: 'swiperefreshlayout'
-    exclude group: 'androidx.viewpager', module: 'viewpager'
-    // أضف المزيد حسب الحاجة...
-}
-
 dependencies {
-    // مكتبات One UI Project SESL
-    implementation 'io.github.oneuiproject.sesl:appcompat:1.4.0'
-    implementation 'io.github.oneuiproject.sesl:apppickerview:1.0.0'
-    implementation 'io.github.oneuiproject.sesl:indexscroll:1.0.3'
-    implementation 'io.github.oneuiproject.sesl:picker-basic:1.2.0'
-    implementation 'io.github.oneuiproject.sesl:picker-color:1.1.0'
-    implementation 'io.github.oneuiproject.sesl:preference:1.1.0'
-    implementation 'io.github.oneuiproject.sesl:recyclerview:1.4.1'
-    implementation 'io.github.oneuiproject.sesl:swiperefreshlayout:1.0.0'
-    implementation 'io.github.oneuiproject.sesl:material:1.0.0'
+    // مكتبات AndroidX و Material Design
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.core:core-ktx:1.16.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.viewpager:viewpager:1.1.0'
 
     // مكتبة DragTopLayout
     implementation 'com.github.chenupt.android:dragtoplayout:1.2.1'
 
-    // مكتبة AndroidX  
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'  
-
-    // مكتبات أخرى    
-    implementation 'io.github.oneuiproject:icons:1.1.0'  
-    implementation 'io.github.oneuiproject:design:1.2.6'  
+    // مكتبات أخرى
+    implementation 'com.airbnb.android:lottie:6.4.0'
 }
