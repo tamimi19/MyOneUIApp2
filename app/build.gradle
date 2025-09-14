@@ -27,16 +27,22 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        resources {
+            excludes += "META-INF/androidx.appcompat_appcompat.version"
+        }
+    }
 }
 
 configurations.all {
     exclude group: 'androidx.core', module: 'core'
-    // أضف المزيد حسب الحاجة...
 }
 
 dependencies {
     // مكتبات One UI Project SESL
-    implementation 'io.github.oneuiproject.sesl:appcompat:1.4.0'
+    implementation('io.github.oneuiproject.sesl:appcompat:1.4.0') {
+        exclude group: 'androidx.appcompat', module: 'appcompat'
+    }
     implementation 'io.github.oneuiproject.sesl:apppickerview:1.0.0'
     implementation 'io.github.oneuiproject.sesl:indexscroll:1.0.3'
     implementation 'io.github.oneuiproject.sesl:picker-basic:1.2.0'
@@ -47,11 +53,11 @@ dependencies {
     implementation 'io.github.oneuiproject.sesl:material:1.0.0'
     implementation 'io.github.oneuiproject.sesl:core:1.3.0'
 
-    // مكتبة AndroidX  
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'  
+    // مكتبة AndroidX
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-    // مكتبات أخرى  
-    implementation 'com.airbnb.android:lottie:6.4.0'  
-    implementation 'io.github.oneuiproject:icons:1.1.0'  
-    implementation 'io.github.oneuiproject:design:1.2.6'  
+    // مكتبات أخرى
+    implementation 'com.airbnb.android:lottie:6.4.0'
+    implementation 'io.github.oneuiproject:icons:1.1.0'
+    implementation 'io.github.oneuiproject:design:1.2.6'
 }
