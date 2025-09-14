@@ -13,14 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- AppBarLayout من سامسونج لدعم ميزة السحب لأسفل -->
-        <androidx.appcompat.widget.SeslAppBarLayout
+        <!-- استخدام AppBarLayout الخاص بمكتبة One UI -->
+        <de.dlyt.yanndroid.oneui.widget.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <androidx.appcompat.widget.SeslToolbar
+            <!-- استخدام Toolbar الخاص بمكتبة One UI -->
+            <de.dlyt.yanndroid.oneui.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -28,7 +29,7 @@
                 app:title="@string/app_name"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        </androidx.appcompat.widget.SeslAppBarLayout>
+        </de.dlyt.yanndroid.oneui.widget.AppBarLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -38,8 +39,8 @@
             android:textSize="24sp" />
     </LinearLayout>
 
-    <!-- درج التنقل على الجانب الأيمن -->
-    <com.google.android.material.navigation.NavigationView
+    <!-- استخدام NavigationView الخاص بمكتبة One UI -->
+    <de.dlyt.yanndroid.oneui.view.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
