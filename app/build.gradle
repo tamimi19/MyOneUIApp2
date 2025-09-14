@@ -43,7 +43,7 @@ configurations.all {
 
 dependencies {
     // ...
-    implementation 'io.github.oneuiproject:design:4.5.0'
+    implementation 'io.github.oneuiproject:oneui-design:4.5.0'
 
     // مكتبات أخرى
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
