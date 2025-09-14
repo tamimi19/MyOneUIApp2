@@ -32,6 +32,8 @@ android {
 configurations.all {
     exclude group: 'androidx.appcompat', module: 'appcompat'
     exclude group: 'androidx.core', module: 'core'
+    exclude group: 'androidx.recyclerview', module: 'recyclerview'
+    exclude group: 'androidx.swiperefreshlayout', module: 'swiperefreshlayout'
     // أضف المزيد حسب الحاجة...
 }
 
