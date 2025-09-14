@@ -1,7 +1,7 @@
 <resources>
 
     <!-- الثيم الرئيسي للتطبيق بأسلوب One UI -->
-    <style name="OneUITheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="OneUITheme" parent="Theme.Sesl.Light.NoActionBar">
         <!-- ألوان أساسية -->
         <item name="colorPrimary">@color/oneui_primary</item>
         <item name="colorPrimaryDark">@color/oneui_primary_dark</item>
