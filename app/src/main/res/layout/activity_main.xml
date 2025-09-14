@@ -7,43 +7,26 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <!-- وضع DragTopLayout كالمحتوى الرئيسي -->
-    <github.chenupt.dragtoplayout.DragTopLayout
+    <!-- المحتوى الرئيسي -->
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- top view -->
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Drag down to reveal"/>
-        </LinearLayout>
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/app_name" />
 
-        <!-- content view -->
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:title="@string/app_name"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/title_main"
-                android:gravity="center"
-                android:textSize="24sp"/>
-        </LinearLayout>
-    </github.chenupt.dragtoplayout.DragTopLayout>
+            android:layout_height="match_parent"
+            android:text="@string/title_main"
+            android:gravity="center"
+            android:textSize="24sp" />
+    </LinearLayout>
 
     <!-- درج التنقل على الجانب الأيمن -->
     <com.google.android.material.navigation.NavigationView
@@ -51,5 +34,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        app:menu="@menu/drawer_menu"/>
+        app:menu="@menu/drawer_menu" />
+
 </androidx.drawerlayout.widget.DrawerLayout>
