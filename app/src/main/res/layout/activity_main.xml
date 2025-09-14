@@ -13,12 +13,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <!-- AppBarLayout من سامسونج لدعم ميزة السحب لأسفل -->
+        <androidx.appcompat.widget.SeslAppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:title="@string/app_name" />
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <androidx.appcompat.widget.SeslToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:title="@string/app_name"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </androidx.appcompat.widget.SeslAppBarLayout>
 
         <TextView
             android:layout_width="match_parent"
