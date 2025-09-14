@@ -1,15 +1,15 @@
 package com.example.myoneuiapp2;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.Gravity;
-import com.google.android.material.navigation.NavigationView;
 import android.content.Intent;
 
-// استيراد مكونات سامسونج SESL
-import androidx.appcompat.widget.SeslToolbar;
-import androidx.appcompat.widget.SeslAppBarLayout;
+// استيراد مكونات سامسونج SESL من المسار الصحيح
+import de.dlyt.yanndroid.oneui.app.AppCompatActivity;
+import de.dlyt.yanndroid.oneui.widget.Toolbar;
+import de.dlyt.yanndroid.oneui.widget.AppBarLayout;
+import de.dlyt.yanndroid.oneui.view.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,18 +21,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // ربط الـ AppBarLayout وتفعيل ميزة السحب لأسفل للوصول السهل
-        SeslAppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
-        appBarLayout.seslSetExpandedAccessibilityEnabled(true);
+        // تم تغيير اسم الكلاس والدالة لتتوافق مع المكتبة
+        AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
+        appBarLayout.setExpandedAccessibilityEnabled(true);
 
-        // استخدام SeslToolbar بدل Toolbar العادي
-        SeslToolbar toolbar = findViewById(R.id.toolbar);
+        // استخدام Toolbar الخاص بـ One UI
+        // تم تغيير اسم الكلاس
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+        // استخدام NavigationView الخاص بـ One UI
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         // إعداد أيقونة القائمة لفتح درج التنقل على اليمين
-        toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
+        // ملاحظة: قد تحتاج إلى أيقونة مخصصة هنا إذا كانت الايقونة الافتراضية لا تعمل
+        toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_menu_overflow_material);
         toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(Gravity.END));
 
         // التعامل مع اختيار عناصر القائمة الجانبية
