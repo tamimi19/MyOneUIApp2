@@ -34,7 +34,6 @@ configurations.all {
     exclude group: 'androidx.appcompat', module: 'appcompat'
     exclude group: 'androidx.core', module: 'core'
     exclude group: 'androidx.drawerlayout', module: 'drawerlayout'
-    exclude group: 'com.google.android.material', module: 'material'
 }
 
 dependencies {
