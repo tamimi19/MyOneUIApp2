@@ -42,18 +42,8 @@ configurations.all {
 }
 
 dependencies {
-    // إصدار موحد لكل مكتبات SESL لضمان التوافق
-    def sesl_version = "4.5.0"
-
-    // مكتبات One UI Project (SESL) - وهي بديل مباشر لمكتبات AndroidX
-    implementation "io.github.oneuiproject.sesl:appcompat:$sesl_version"
-    implementation "io.github.oneuiproject.sesl:preference:$sesl_version"
-    implementation "io.github.oneuiproject.sesl:material:$sesl_version"
-    implementation "io.github.oneuiproject.sesl:recyclerview:$sesl_version"
-    implementation "io.github.oneuiproject.sesl:core:$sesl_version"
-    implementation "io.github.oneuiproject.sesl:drawerlayout:$sesl_version"
-    implementation "io.github.oneuiproject.sesl:coordinatorlayout:$sesl_version"
-    implementation "io.github.oneuiproject.sesl:swiperefreshlayout:$sesl_version"
+    // ...
+    implementation 'io.github.oneuiproject:design:4.5.0'
 
     // مكتبات أخرى
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
