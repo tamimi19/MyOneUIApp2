@@ -33,6 +33,12 @@ android {
 configurations.all {
     exclude group: 'androidx.appcompat', module: 'appcompat'
     exclude group: 'androidx.core', module: 'core'
+    exclude group: 'com.google.android.material', module: 'material'
+    exclude group: 'androidx.preference', module: 'preference'
+    exclude group: 'androidx.recyclerview', module: 'recyclerview'
+    exclude group: 'androidx.drawerlayout', module: 'drawerlayout'
+    exclude group: 'androidx.coordinatorlayout', module: 'coordinatorlayout'
+    exclude group: 'androidx.swiperefreshlayout', module: 'swiperefreshlayout'
 }
 
 dependencies {
