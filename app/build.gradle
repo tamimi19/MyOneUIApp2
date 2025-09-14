@@ -46,6 +46,7 @@ dependencies {
     implementation 'io.github.oneuiproject.sesl:recyclerview:1.4.1'
     implementation 'io.github.oneuiproject.sesl:swiperefreshlayout:1.0.0'
     implementation 'io.github.oneuiproject.sesl:material:1.0.0'
+    implementation 'io.github.oneuiproject.sesl:core:1.3.0'
 
     // مكتبة DragTopLayout
     implementation 'com.github.chenupt.android:dragtoplayout:1.2.1'
