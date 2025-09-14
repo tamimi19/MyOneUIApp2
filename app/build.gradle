@@ -24,19 +24,21 @@ android {
         viewBinding true
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
 configurations.all {
     exclude group: 'androidx.appcompat', module: 'appcompat'
     exclude group: 'androidx.core', module: 'core'
+    exclude group: 'androidx.drawerlayout', module: 'drawerlayout'
+    exclude group: 'com.google.android.material', module: 'material'
     // أضف المزيد حسب الحاجة...
 }
 
 dependencies {
-    // مكتبات One UI Project SESL
+    // مكتبات One UI Project SESL (الإصدارات الأحدث بناءً على Maven حتى 2025، لم تتغير كثيرًا)
     implementation 'io.github.oneuiproject.sesl:appcompat:1.4.0'
     implementation 'io.github.oneuiproject.sesl:apppickerview:1.0.0'
     implementation 'io.github.oneuiproject.sesl:indexscroll:1.0.3'
@@ -45,10 +47,11 @@ dependencies {
     implementation 'io.github.oneuiproject.sesl:preference:1.1.0'
     implementation 'io.github.oneuiproject.sesl:recyclerview:1.4.1'
     implementation 'io.github.oneuiproject.sesl:swiperefreshlayout:1.0.0'
-    implementation 'io.github.oneuiproject.sesl:material:1.0.0'
+    implementation 'io.github.oneuiproject.sesl:material:1.0.0'  // يمكن تحديث إلى 1.0.0-beta01 إذا توفر
     implementation 'io.github.oneuiproject.sesl:core:1.3.0'
     implementation 'io.github.oneuiproject.sesl:drawerlayout:1.0.0'
     implementation 'io.github.oneuiproject.sesl:coordinatorlayout:1.0.0'
+    implementation 'io.github.oneuiproject.sesl:navigation:1.0.0'  // أضفت لدعم NavigationView بشكل كامل
 
     // مكتبة AndroidX  
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
