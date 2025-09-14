@@ -1,11 +1,13 @@
 package com.example.myoneuiapp2;
 
 import android.os.Bundle;
-import io.github.oneuiproject.sesl.support.v7.app.AppCompatActivity;
-import io.github.oneuiproject.sesl.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class ScrollListActivity extends AppCompatActivity {
 
@@ -16,7 +18,11 @@ public class ScrollListActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar_scroll);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_scroll_list);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
 
         // ملء القائمة بـ70 عنصر
         String[] items = new String[70];
@@ -25,12 +31,12 @@ public class ScrollListActivity extends AppCompatActivity {
         }
         ListView listView = findViewById(R.id.list_view);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-            android.R.layout.simple_list_item_1, items);
+                android.R.layout.simple_list_item_1, items);
         listView.setAdapter(adapter);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // معالجة زر العودة في شريط الأدوات
         if (item.getItemId() == android.R.id.home) {
             finish();
