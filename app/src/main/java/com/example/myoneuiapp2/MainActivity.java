@@ -1,7 +1,7 @@
 package com.example.myoneuiapp2;
 
 import android.os.Bundle;
-import androidx.drawerlayout.widget.DrawerLayout;
+import sesl.support.drawerlayout.widget.DrawerLayout;
 import android.view.Gravity;
 import android.content.Intent;
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         // إعداد أيقونة القائمة لفتح درج التنقل على اليمين
         // ملاحظة: قد تحتاج إلى أيقونة مخصصة هنا إذا كانت الايقونة الافتراضية لا تعمل
-        toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_menu_overflow_material);
+        toolbar.setNavigationIcon(sesl.support.appcompat.R.drawable.abc_ic_menu_overflow_material);
         toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(Gravity.END));
 
         // التعامل مع اختيار عناصر القائمة الجانبية
