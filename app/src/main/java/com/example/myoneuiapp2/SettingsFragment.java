@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SwitchPreferenceCompat;
+import io.github.oneuiproject.sesl.support.v7.app.AppCompatDelegate;
+import io.github.oneuiproject.sesl.preference.ListPreference;
+import io.github.oneuiproject.sesl.preference.Preference;
+import io.github.oneuiproject.sesl.preference.PreferenceFragmentCompat;
+import io.github.oneuiproject.sesl.preference.SwitchPreferenceCompat;
 import android.widget.Toast;
 import java.util.Locale;
 
