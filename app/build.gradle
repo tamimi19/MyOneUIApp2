@@ -30,7 +30,6 @@ android {
 }
 
 configurations.all {
-    exclude group: 'androidx.appcompat', module: 'appcompat'
     exclude group: 'androidx.core', module: 'core'
     // أضف المزيد حسب الحاجة...
 }
