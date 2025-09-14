@@ -45,7 +45,6 @@ dependencies {
     implementation 'io.github.oneuiproject.sesl:recyclerview:1.4.1'
     implementation 'io.github.oneuiproject.sesl:swiperefreshlayout:1.0.0'
     implementation 'io.github.oneuiproject.sesl:material:1.0.0'
-    implementation 'io.github.oneuiproject.sesl:core:1.3.0'
     implementation 'io.github.oneuiproject.sesl:drawerlayout:1.0.0'
     implementation 'io.github.oneuiproject.sesl:coordinatorlayout:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
