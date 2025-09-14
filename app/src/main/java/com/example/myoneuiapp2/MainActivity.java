@@ -1,14 +1,15 @@
 package com.example.myoneuiapp2;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.Gravity;
-import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
-import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
+
+// استيراد مكونات سامسونج SESL
+import androidx.appcompat.widget.SeslToolbar;
+import androidx.appcompat.widget.SeslAppBarLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +20,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        // ربط الـ AppBarLayout وتفعيل ميزة السحب لأسفل للوصول السهل
+        SeslAppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
+        appBarLayout.seslSetExpandedAccessibilityEnabled(true);
+
+        // استخدام SeslToolbar بدل Toolbar العادي
+        SeslToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
