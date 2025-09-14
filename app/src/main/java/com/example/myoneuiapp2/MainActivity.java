@@ -6,10 +6,10 @@ import android.view.Gravity;
 import android.content.Intent;
 
 // استيراد مكونات سامسونج SESL من المسار الصحيح
-import de.dlyt.yanndroid.oneui.app.AppCompatActivity;
-import de.dlyt.yanndroid.oneui.widget.Toolbar;
-import de.dlyt.yanndroid.oneui.widget.AppBarLayout;
-import de.dlyt.yanndroid.oneui.view.NavigationView;
+import sesl.support.v7.app.AppCompatActivity;
+import sesl.support.v7.widget.Toolbar;
+import sesl.support.v7.widget.AppBarLayout;
+import sesl.support.v7.view.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
