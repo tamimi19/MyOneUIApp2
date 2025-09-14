@@ -1,15 +1,15 @@
 package com.example.myoneuiapp2;
 
-import android.content.Intent;
 import android.os.Bundle;
+import sesl.support.drawerlayout.widget.DrawerLayout;
+import android.view.Gravity;
+import android.content.Intent;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.navigation.NavigationView;
+// استيراد مكونات سامسونج SESL من المسار الصحيح
+import sesl.support.v7.app.AppCompatActivity;
+import sesl.support.v7.widget.Toolbar;
+import sesl.support.v7.widget.AppBarLayout;
+import sesl.support.v7.view.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,24 +20,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-		// AppBarLayout (لا حاجة لاستدعاءات غير قياسية هنا)
+        // ربط الـ AppBarLayout وتفعيل ميزة السحب لأسفل للوصول السهل
+        // تم تغيير اسم الكلاس والدالة لتتوافق مع المكتبة
         AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
+        appBarLayout.setExpandedAccessibilityEnabled(true);
 
-        // Toolbar من AppCompat
+        // استخدام Toolbar الخاص بـ One UI
+        // تم تغيير اسم الكلاس
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-
+        // استخدام NavigationView الخاص بـ One UI
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-        // أيقونة التنقل — استخدم مورد AppCompat الافتراضي المضمن أو ضع موردك في res/drawable
-        toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_menu_overflow_material);
-        toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.END));
+        // إعداد أيقونة القائمة لفتح درج التنقل على اليمين
+        // ملاحظة: قد تحتاج إلى أيقونة مخصصة هنا إذا كانت الايقونة الافتراضية لا تعمل
+        toolbar.setNavigationIcon(sesl.support.appcompat.R.drawable.abc_ic_menu_overflow_material);
+        toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(Gravity.END));
 
-        // التعامل مع عناصر القائمة
+        // التعامل مع اختيار عناصر القائمة الجانبية
         navigationView.setNavigationItemSelectedListener(menuItem -> {
-            drawerLayout.closeDrawer(GravityCompat.END);
+            drawerLayout.closeDrawer(Gravity.END);
             int id = menuItem.getItemId();
             if (id == R.id.nav_settings) {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
