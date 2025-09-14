@@ -4,15 +4,15 @@ plugins {
 
 android {
     namespace "com.example.myoneuiapp2"
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.myoneuiapp2"
-        minSdk 30
-        targetSdk 33
+        minSdk 24
+        targetSdk 34
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -22,33 +22,40 @@ android {
     }
     buildFeatures {
         viewBinding true
-        dataBinding true
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
+// استثناء مكتبات جوجل AndroidX لمنع التعارض مع مكتبات SESL البديلة
 configurations.all {
     exclude group: 'androidx.appcompat', module: 'appcompat'
     exclude group: 'androidx.core', module: 'core'
+    exclude group: 'com.google.android.material', module: 'material'
+    exclude group: 'androidx.preference', module: 'preference'
+    exclude group: 'androidx.recyclerview', module: 'recyclerview'
+    exclude group: 'androidx.drawerlayout', module: 'drawerlayout'
+    exclude group: 'androidx.coordinatorlayout', module: 'coordinatorlayout'
+    exclude group: 'androidx.swiperefreshlayout', module: 'swiperefreshlayout'
 }
 
 dependencies {
-    implementation 'io.github.oneuiproject.sesl:appcompat:1.4.0'
-    implementation 'io.github.oneuiproject.sesl:apppickerview:1.0.0'
-    implementation 'io.github.oneuiproject.sesl:indexscroll:1.0.3'
-    implementation 'io.github.oneuiproject.sesl:picker-basic:1.2.0'
-    implementation 'io.github.oneuiproject.sesl:picker-color:1.1.0'
-    implementation 'io.github.oneuiproject.sesl:preference:1.1.0'
-    implementation 'io.github.oneuiproject.sesl:recyclerview:1.4.1'
-    implementation 'io.github.oneuiproject.sesl:swiperefreshlayout:1.0.0'
-    implementation 'io.github.oneuiproject.sesl:material:1.0.0'
-    implementation 'io.github.oneuiproject.sesl:drawerlayout:1.0.0'
-    implementation 'io.github.oneuiproject.sesl:coordinatorlayout:1.0.0'
+    // إصدار موحد لكل مكتبات SESL لضمان التوافق
+    def sesl_version = "4.5.0"
+
+    // مكتبات One UI Project (SESL) - وهي بديل مباشر لمكتبات AndroidX
+    implementation "io.github.oneuiproject.sesl:appcompat:$sesl_version"
+    implementation "io.github.oneuiproject.sesl:preference:$sesl_version"
+    implementation "io.github.oneuiproject.sesl:material:$sesl_version"
+    implementation "io.github.oneuiproject.sesl:recyclerview:$sesl_version"
+    implementation "io.github.oneuiproject.sesl:core:$sesl_version"
+    implementation "io.github.oneuiproject.sesl:drawerlayout:$sesl_version"
+    implementation "io.github.oneuiproject.sesl:coordinatorlayout:$sesl_version"
+    implementation "io.github.oneuiproject.sesl:swiperefreshlayout:$sesl_version"
+
+    // مكتبات أخرى
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.airbnb.android:lottie:6.4.0'
     implementation 'io.github.oneuiproject:icons:1.1.0'
-    implementation 'io.github.oneuiproject:design:1.2.6'
 }
