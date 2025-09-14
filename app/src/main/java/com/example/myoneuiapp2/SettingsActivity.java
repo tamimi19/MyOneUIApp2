@@ -1,9 +1,11 @@
 package com.example.myoneuiapp2;
 
 import android.os.Bundle;
-import io.github.oneuiproject.sesl.support.v7.app.AppCompatActivity;
-import io.github.oneuiproject.sesl.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class SettingsActivity extends AppCompatActivity {
     @Override
@@ -13,8 +15,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar_settings);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_settings);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_settings);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // عرض واجهة التفضيلات
         getSupportFragmentManager().beginTransaction()
@@ -23,7 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // زر العودة
         if (item.getItemId() == android.R.id.home) {
             finish();
