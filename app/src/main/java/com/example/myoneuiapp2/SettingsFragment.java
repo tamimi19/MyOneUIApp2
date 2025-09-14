@@ -1,80 +1,30 @@
 package com.example.myoneuiapp2;
 
-import android.app.Activity;
-import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
-import io.github.oneuiproject.sesl.support.v7.app.AppCompatDelegate;
-import io.github.oneuiproject.sesl.preference.ListPreference;
-import io.github.oneuiproject.sesl.preference.Preference;
-import io.github.oneuiproject.sesl.preference.PreferenceFragmentCompat;
-import io.github.oneuiproject.sesl.preference.SwitchPreferenceCompat;
-import android.widget.Toast;
-import java.util.Locale;
 
-public class SettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener {
+// استيراد مكونات التفضيلات المخصصة من مكتبة One UI (SESL)
+import dev.oneuiproject.oneui.preference.ListPreference;
+import dev.oneuiproject.oneui.preference.Preference;
+import dev.oneuiproject.oneui.preference.PreferenceFragmentCompat;
+import dev.oneuiproject.oneui.preference.SwitchPreferenceCompat;
+
+public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
 
-        // إعداد الاستماع لتغييرات التفضيلات
-        ListPreference languagePref = findPreference("language");
-        if (languagePref != null) {
-            languagePref.setOnPreferenceChangeListener(this);
-        }
+        // هنا يمكنك إضافة منطق خاص بالتفضيلات إذا أردت
+        // على سبيل المثال، ربط ملخص القائمة بالقيمة الحالية
         ListPreference themePref = findPreference("theme");
         if (themePref != null) {
-            themePref.setOnPreferenceChangeListener(this);
+            themePref.setSummary(themePref.getEntry());
+            themePref.setOnPreferenceChangeListener((preference, newValue) -> {
+                // يمكنك هنا وضع كود تغيير الثيم
+                // ...
+                preference.setSummary(themePref.getEntries()[themePref.findIndexOfValue(newValue.toString())]);
+                return true;
+            });
         }
-        SwitchPreferenceCompat notificationsPref = findPreference("notifications");
-        if (notificationsPref != null) {
-            notificationsPref.setOnPreferenceChangeListener(this);
-        }
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String key = preference.getKey();
-        Activity activity = getActivity();
-        if (key.equals("language")) {
-            // تغيير اللغة
-            String lang = newValue.toString();
-            Locale locale = new Locale(lang);
-            Locale.setDefault(locale);
-            Configuration config = new Configuration();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                config.setLocale(locale);
-            } else {
-                config.locale = locale;
-            }
-            if (activity != null) {
-                activity.getResources().updateConfiguration(config, activity.getResources().getDisplayMetrics());
-                activity.recreate();
-            }
-            return true;
-        } else if (key.equals("theme")) {
-            // تغيير السمة (الوضع)
-            String theme = newValue.toString();
-            if (theme.equals("dark")) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
-            if (activity != null) {
-                activity.recreate();
-            }
-            return true;
-        } else if (key.equals("notifications")) {
-            // تبديل الإشعارات
-            boolean enabled = (boolean) newValue;
-            if (enabled) {
-                Toast.makeText(getContext(), getString(R.string.notifications_enabled), Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getContext(), getString(R.string.notifications_disabled), Toast.LENGTH_SHORT).show();
-            }
-            return true;
-        }
-        return false;
     }
 }
